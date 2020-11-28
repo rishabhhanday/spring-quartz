@@ -1,4 +1,4 @@
-# Quartz with spring application
+# Quartz with spring boot
 
 ## How to run the application
 1. mvn clean install
