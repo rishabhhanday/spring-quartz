@@ -7,5 +7,6 @@ RUN cd /usr/local/bin/
 COPY /aws-scripts .
 
 RUN sed -i 's/localhost/dynamodb-local/gi' table-util.sh
+RUN chmod 777 *
 
-ENTRYPOINT [ "./table-util.sh" ]
+ENTRYPOINT [ "sh","./table-util.sh" ]
