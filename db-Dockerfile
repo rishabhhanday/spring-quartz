@@ -1,0 +1,11 @@
+FROM amazon/aws-cli
+ENV  AWS_ACCESS_KEY_ID=fakeaccesskey
+ENV  AWS_SECRET_ACCESS_KEY=fakesecretkey
+ENV  AWS_REGION=eu-west-1
+
+RUN cd /usr/local/bin/
+COPY /aws-scripts .
+
+RUN sed -i 's/localhost/dynamodb-local/gi' tables-refresh.sh
+
+ENTRYPOINT [ "./tables-refresh.sh" ]

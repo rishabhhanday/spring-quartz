@@ -1,0 +1,26 @@
+version: '2'
+services:
+  spring-quartz:
+    depends_on:
+      - dynamodb-local
+      - aws-cli
+    image: spring-quartz
+    container_name: spring-quartz
+    build:
+      context: .
+      dockerfile: app-Dockerfile
+    ports:
+      - '8989:8080'
+  dynamodb-local:
+    image: amazon/dynamodb-local
+    container_name: dynamodb-local
+    ports:
+      - "8000:8000"
+    command: -jar DynamoDBLocal.jar -sharedDb
+  aws-cli:
+    depends_on:
+      - dynamodb-local
+    image: aws-cli-local
+    build:
+      context: .
+      dockerfile: db-Dockerfile
